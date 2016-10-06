@@ -30,8 +30,10 @@ public class GoogleSearchActivity extends AppCompatActivity {
         webSettings.setDomStorageEnabled(true);
         webSettings.setUseWideViewPort(true);
         webSettings.setLoadWithOverviewMode(true);
-
-        webView.setWebViewClient(new MyWebViewClient());
+        
+        // to increase webview performance
+        webSettings.setRenderPriority(RenderPriority.HIGH);
+        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
 
         if (Build.VERSION.SDK_INT >= 19) {
             webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
@@ -39,6 +41,8 @@ public class GoogleSearchActivity extends AppCompatActivity {
         else {
             webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }
+        
+        webView.setWebViewClient(new MyWebViewClient());
 
         webView.loadUrl(url);
     }
