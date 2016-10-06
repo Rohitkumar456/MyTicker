@@ -1,0 +1,163 @@
+package com.rajatgoyal.myticker;
+
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class MainActivity extends AppCompatActivity {
+
+    private static final String STOCK_URL = "http://finance.google.com/finance/info?q=NASDAQ%3a";
+
+    private static final String SYMBOL = "symbol";
+    private static final String EXCHANGE = "exchange";
+    private static final String LAST_TRADE = "last_trade";
+    private static final String CHANGE = "change";
+    private static final String PERC_CHANGE = "perc_change";
+
+    private HashMap<String, String> hmStockData;
+
+    private EditText edSymbol = null;
+    private Button bnRetrieve = null;
+    private String symbol = "";
+
+    private static final String TAG = "MainActivity";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        bnRetrieve = (Button) findViewById(R.id.bn_retrieve);
+
+        edSymbol = (EditText) findViewById(R.id.edit_symbol);
+
+        edSymbol.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1,
+                                          int arg2, int arg3) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence arg0, int arg1, int arg2,
+                                      int arg3) {
+
+                // collect the text from the edit control, and trim off spaces.
+                symbol = edSymbol.getText().toString().trim();
+
+                // if the user has entered at least one character, enable the
+                // bnRetrieve button.
+                // otherwise, disable it.
+                bnRetrieve.setEnabled(symbol.length() > 0);
+
+            }
+
+        });
+    }
+
+    public void retrieveQuote(View vw) {
+        String request = STOCK_URL + symbol;
+
+        if (checkInternet()) {
+            new StockRetrieveTask() {
+                @Override
+                protected void onPreExecute() {
+                    Log.i(TAG, "onPreExecute");
+                    super.onPreExecute();
+                }
+
+                @Override
+                protected void onPostExecute(String response) {
+                    super.onPostExecute(response);
+                    Log.d(TAG, response);
+                    readJsonResponse(response);
+                    displayResponse();
+                }
+
+            }.execute(request);
+        }
+    }
+
+    private boolean checkInternet() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo ni = cm.getActiveNetworkInfo();
+        if (ni != null && ni.isConnected()) {
+            return true;
+        } else {
+            Toast.makeText(MainActivity.this, "Network Error", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    }
+
+    private void readJsonResponse(String response) {
+        response = response.substring(2);
+        ArrayList<String> termsList = new ArrayList<>();
+        hmStockData = new HashMap<>();
+        try {
+            Toast.makeText(MainActivity.this,"Success !",Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "readJsonResponse: " + response);
+            JSONArray jArr = new JSONArray(response);
+            Log.d(TAG, "jArr to string : " + jArr.toString());
+
+            for(int i=0;i<=jArr.length();i++) {
+                JSONObject jObj = jArr.getJSONObject(0);
+
+                hmStockData.put(SYMBOL, jObj.getString("t"));
+                hmStockData.put(EXCHANGE, jObj.getString("e"));
+                hmStockData.put(LAST_TRADE, jObj.getString("l"));
+                hmStockData.put(CHANGE, jObj.getString("c"));
+                hmStockData.put(PERC_CHANGE, jObj.getString("cp"));
+
+                Log.d(TAG, "ticker: " + jObj.getString("t"));
+                Log.d(TAG, "exchange: " + jObj.getString("e"));
+                Log.d(TAG, "price: " + jObj.getString("l"));
+
+            }
+
+        } catch (JSONException e) {
+            Log.d(TAG, "error in json: ");
+            e.printStackTrace();
+        }
+    }
+
+    private void updateTextView(int id, String name) {
+
+        TextView tvTarget = (TextView) findViewById(id);
+
+        if (tvTarget == null) return;
+
+        tvTarget.setText(hmStockData.containsKey(name) ? hmStockData.get(name) : "");
+
+    }
+
+    private void displayResponse() {
+
+        Log.i(TAG, "displayResponse");
+
+        updateTextView(R.id.tv_symbol, SYMBOL);
+        updateTextView(R.id.tv_exchange, EXCHANGE);
+        updateTextView(R.id.tv_last, LAST_TRADE);
+        updateTextView(R.id.tv_change, CHANGE);
+        updateTextView(R.id.tv_perc_change, PERC_CHANGE);
+    }
+}
