@@ -1,8 +1,10 @@
 package com.rajatgoyal.myticker;
 
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -30,6 +32,13 @@ public class GoogleSearchActivity extends AppCompatActivity {
         webSettings.setLoadWithOverviewMode(true);
 
         webView.setWebViewClient(new MyWebViewClient());
+
+        if (Build.VERSION.SDK_INT >= 19) {
+            webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        }
+        else {
+            webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        }
 
         webView.loadUrl(url);
     }
