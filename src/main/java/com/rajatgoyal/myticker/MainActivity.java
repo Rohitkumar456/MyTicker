@@ -1,5 +1,6 @@
 package com.rajatgoyal.myticker;
 
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -62,7 +63,12 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence arg0, int arg1, int arg2,
                                       int arg3) {
 
+                // collect the text from the edit control, and trim off spaces.
                 symbol = edSymbol.getText().toString().trim();
+
+                // if the user has entered at least one character, enable the
+                // bnRetrieve button.
+                // otherwise, disable it.
                 bnRetrieve.setEnabled(symbol.length() > 0);
 
             }
@@ -154,5 +160,11 @@ public class MainActivity extends AppCompatActivity {
         updateTextView(R.id.tv_last, LAST_TRADE);
         updateTextView(R.id.tv_change, CHANGE);
         updateTextView(R.id.tv_perc_change, PERC_CHANGE);
+    }
+
+    public void googleSearch(View v) {
+        Intent i = new Intent(MainActivity.this, GoogleSearchActivity.class);
+        i.putExtra("keyword",symbol);
+        startActivity(i);
     }
 }

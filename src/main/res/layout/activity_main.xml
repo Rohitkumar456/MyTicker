@@ -12,8 +12,8 @@
     tools:context="com.rajatgoyal.myticker.MainActivity">
 
     <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:shrinkColumns="*"
         android:stretchColumns="*" >
 
@@ -25,8 +25,7 @@
                 android:id="@+id/edit_symbol"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:inputType="textCapCharacters"
-                android:maxLength="5" />
+                android:inputType="textCapCharacters" />
 
             <Button
                 android:id="@+id/bn_retrieve"
@@ -173,18 +172,25 @@
         </TableRow>
 
         <TableRow
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dip" >
 
             <ImageView
                 android:id="@+id/img_chart"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_span="2"
                 android:contentDescription="@string/stock_chart" />
         </TableRow>
     </TableLayout>
+
+    <Button
+        android:text="Google Search"
+        android:layout_gravity="center"
+        android:onClick="googleSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
