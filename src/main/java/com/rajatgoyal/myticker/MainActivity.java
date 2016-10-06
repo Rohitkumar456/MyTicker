@@ -62,12 +62,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence arg0, int arg1, int arg2,
                                       int arg3) {
 
-                // collect the text from the edit control, and trim off spaces.
                 symbol = edSymbol.getText().toString().trim();
-
-                // if the user has entered at least one character, enable the
-                // bnRetrieve button.
-                // otherwise, disable it.
                 bnRetrieve.setEnabled(symbol.length() > 0);
 
             }
