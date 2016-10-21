@@ -52,73 +52,7 @@ public class DatabaseAdapter {
         return Dbh.COLUMN_STOCKNAME;
     }
 
-    /*
-
-    public List<String> retcolloc() {
-        SQLiteDatabase db = dbh.getWritableDatabase();
-
-        String[] columns = {Dbh.COLUMN_ID, Dbh.COLUMN_ITEMNAMEF, Dbh.COLUMN_ITEMNAMEL, Dbh.COLUMN_DESIG, Dbh.COLUMN_PHNO, Dbh.COLUMN_PHNO_ERP, Dbh.COLUMN_EMPNO, Dbh.COLUMN_LOC, Dbh.COLUMN_DPT, Dbh.COLUMN_DOB, Dbh.COLUMN_DOJN, Dbh.COLUMN_DOJL, Dbh.COLUMN_FAX, Dbh.COLUMN_ADDRESS, Dbh.COLUMN_EMAIL};
-        Cursor cursor = db.query(Dbh.TABLE_ITEMS, columns, null, null, null, null, null);
-        List<String> array = new ArrayList<String>();
-        while(cursor.moveToNext()){
-            String uname = cursor.getString(cursor.getColumnIndex(Dbh.COLUMN_LOC));
-            array.add(uname);
-        }
-        return array;
-    }
-
-    public List<String> retcoldpt() {
-        SQLiteDatabase db = dbh.getWritableDatabase();
-
-        String[] columns = {Dbh.COLUMN_ID, Dbh.COLUMN_ITEMNAMEF, Dbh.COLUMN_ITEMNAMEL, Dbh.COLUMN_DESIG, Dbh.COLUMN_PHNO, Dbh.COLUMN_PHNO_ERP, Dbh.COLUMN_EMPNO, Dbh.COLUMN_LOC, Dbh.COLUMN_DPT, Dbh.COLUMN_DOB, Dbh.COLUMN_DOJN, Dbh.COLUMN_DOJL, Dbh.COLUMN_FAX, Dbh.COLUMN_ADDRESS, Dbh.COLUMN_EMAIL};
-        Cursor cursor = db.query(Dbh.TABLE_ITEMS, columns, null, null, null, null, null);
-        List<String> array = new ArrayList<String>();
-        while(cursor.moveToNext()){
-            String uname = cursor.getString(cursor.getColumnIndex(Dbh.COLUMN_DPT));
-            array.add(uname);
-        }
-        return array;
-    }
-    public List<String> retcoldesig() {
-        SQLiteDatabase db = dbh.getWritableDatabase();
-
-        String[] columns = {Dbh.COLUMN_ID, Dbh.COLUMN_ITEMNAMEF, Dbh.COLUMN_ITEMNAMEL, Dbh.COLUMN_DESIG, Dbh.COLUMN_PHNO, Dbh.COLUMN_PHNO_ERP, Dbh.COLUMN_EMPNO, Dbh.COLUMN_LOC, Dbh.COLUMN_DPT, Dbh.COLUMN_DOB, Dbh.COLUMN_DOJN, Dbh.COLUMN_DOJL, Dbh.COLUMN_FAX, Dbh.COLUMN_ADDRESS, Dbh.COLUMN_EMAIL};
-        Cursor cursor = db.query(Dbh.TABLE_ITEMS, columns, null, null, null, null, null);
-        List<String> array = new ArrayList<String>();
-        while(cursor.moveToNext()){
-            String uname = cursor.getString(cursor.getColumnIndex(Dbh.COLUMN_DESIG));
-            array.add(uname);
-        }
-        return array;
-    }
-
-    public List<String> retcoleno() {
-        SQLiteDatabase db = dbh.getWritableDatabase();
-
-        String[] columns = {Dbh.COLUMN_ID, Dbh.COLUMN_ITEMNAMEF, Dbh.COLUMN_ITEMNAMEL, Dbh.COLUMN_DESIG, Dbh.COLUMN_PHNO, Dbh.COLUMN_PHNO_ERP, Dbh.COLUMN_EMPNO, Dbh.COLUMN_LOC, Dbh.COLUMN_DPT, Dbh.COLUMN_DOB, Dbh.COLUMN_DOJN, Dbh.COLUMN_DOJL, Dbh.COLUMN_FAX, Dbh.COLUMN_ADDRESS, Dbh.COLUMN_EMAIL};
-        Cursor cursor = db.query(Dbh.TABLE_ITEMS, columns, null, null, null, null, null);
-        List<String> array = new ArrayList<String>();
-        while(cursor.moveToNext()){
-            String uname = cursor.getString(cursor.getColumnIndex(Dbh.COLUMN_EMPNO));
-            array.add(uname);
-        }
-        return array;
-    }*/
-
-
-    /*
-    public String retcolnamel(){
-        return Dbh.COLUMN_ITEMNAMEL;
-    }
-    public String retdesig(){
-        return Dbh.COLUMN_DESIG;
-    }
-    public String retempno(){return Dbh.COLUMN_EMPNO;}
-    public String retloc(){return Dbh.COLUMN_LOC;}
-    public String retdpt(){return Dbh.COLUMN_DPT;}*/
-
-
-
+   //  that part was unnecessary
 
     public String[] setvalue(String data){
         SQLiteDatabase db = dbh.getWritableDatabase();
