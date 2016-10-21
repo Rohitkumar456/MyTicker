@@ -1,10 +1,10 @@
-package com.rajatgoyal.myticker;
+package com.wordpress.shloknangia.myticker;
 
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -34,8 +34,10 @@ public class MainActivity extends AppCompatActivity {
     private HashMap<String, String> hmStockData;
 
     private EditText edSymbol = null;
+    TextView tvlast;
     private Button bnRetrieve = null;
     private String symbol = "";
+
 
     private static final String TAG = "MainActivity";
 
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         bnRetrieve = (Button) findViewById(R.id.bn_retrieve);
 
         edSymbol = (EditText) findViewById(R.id.edit_symbol);
+        tvlast = (TextView) findViewById(R.id.tv_last);
 
         edSymbol.addTextChangedListener(new TextWatcher() {
 
@@ -57,31 +60,32 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence arg0, int arg1,
                                           int arg2, int arg3) {
-                //this is a comment
             }
 
             @Override
             public void onTextChanged(CharSequence arg0, int arg1, int arg2,
                                       int arg3) {
 
-                // collect the text from the edit control, and trim off spaces.
                 symbol = edSymbol.getText().toString().trim();
-
-                // if the user has entered at least one character, enable the
-                // bnRetrieve button.
-                // otherwise, disable it.
                 bnRetrieve.setEnabled(symbol.length() > 0);
 
             }
 
         });
     }
+    public void addstock(View view){
+        String rate = tvlast.getText().toString();
+        Intent i = new Intent(MainActivity.this, AddStock.class);
+        i.putExtra("symbol", symbol);
+        i.putExtra("rate", rate);
+        startActivity(i);
+    }
 
     public void retrieveQuote(View vw) {
         String request = STOCK_URL + symbol;
 
         if (checkInternet()) {
-            new StockRetrieveTask() {
+            new StockRetriveTask() {
                 @Override
                 protected void onPreExecute() {
                     Log.i(TAG, "onPreExecute");
@@ -116,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> termsList = new ArrayList<>();
         hmStockData = new HashMap<>();
         try {
-            Toast.makeText(MainActivity.this,"Success !",Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "Success !", Toast.LENGTH_SHORT).show();
             Log.d(TAG, "readJsonResponse: " + response);
             JSONArray jArr = new JSONArray(response);
             Log.d(TAG, "jArr to string : " + jArr.toString());
@@ -162,10 +166,10 @@ public class MainActivity extends AppCompatActivity {
         updateTextView(R.id.tv_change, CHANGE);
         updateTextView(R.id.tv_perc_change, PERC_CHANGE);
     }
-
     public void googleSearch(View v) {
         Intent i = new Intent(MainActivity.this, GoogleSearchActivity.class);
-        i.putExtra("keyword",symbol);
+        i.putExtra("keyword", symbol);
         startActivity(i);
     }
+
 }
