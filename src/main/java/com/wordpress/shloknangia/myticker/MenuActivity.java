@@ -32,7 +32,7 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(m);
     }
     public void check_mystocks(View view){
-        Intent k = new Intent(MenuActivity.this, MyStocks.class);
-        startActivity(k);
+        Intent h = new Intent(MenuActivity.this, MyStocks.class);
+        startActivity(h);
     }
 }
