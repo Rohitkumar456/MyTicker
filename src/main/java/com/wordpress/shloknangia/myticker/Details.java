@@ -68,18 +68,18 @@ public class Details extends AppCompatActivity {
 
     public void modify (View view){
 
-        Intent m = new Intent(Details.this,ModifyOrSell.class);
+        Intent n = new Intent(Details.this,ModifyOrSell.class);
 
-        m.putExtra("stockname", message);
-        m.putExtra("noofstocks", message1);
-        m.putExtra("costrate",message2);
-        m.putExtra("stocksbought", message3);
-        m.putExtra("costprice",message4);
-        m.putExtra("sellrate", message5);
-        m.putExtra("stockssold", message6);
-        m.putExtra("sellprice",message7);
-        m.putExtra("payoff", message8);
+        n.putExtra("stockname", message);
+        n.putExtra("noofstocks", message1);
+        n.putExtra("costrate",message2);
+        n.putExtra("stocksbought", message3);
+        n.putExtra("costprice",message4);
+        n.putExtra("sellrate", message5);
+        n.putExtra("stockssold", message6);
+        n.putExtra("sellprice",message7);
+        n.putExtra("payoff", message8);
 
-        startActivity(m);
+        startActivity(n);
     }
 }

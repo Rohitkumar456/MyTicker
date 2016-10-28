@@ -27,6 +27,7 @@ public class MyStocks extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //snackbar
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
@@ -49,7 +50,7 @@ public class MyStocks extends AppCompatActivity {
                         String data = String.valueOf(adapterView.getItemIdAtPosition(i));
                         Intent intent = new Intent(MyStocks.this, Details.class);
                         String[] args = databaseadapter.setvalue(data);
-                        String message = args[0];
+                        String message0 = args[0];
                         String message1 = args[1];
                         String message2 = args[2];
                         String message3 = args[3];
@@ -59,7 +60,7 @@ public class MyStocks extends AppCompatActivity {
                         String message7 = args[7];
                         String message8 = args[8];
 
-                        intent.putExtra("stockname", message);
+                        intent.putExtra("stockname", message0);
                         intent.putExtra("noofstocks", message1);
                         intent.putExtra("costrate",message2);
                         intent.putExtra("stocksbought", message3);

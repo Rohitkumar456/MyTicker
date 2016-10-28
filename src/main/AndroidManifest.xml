@@ -31,10 +31,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".GoogleSearchActivity" />
         <activity
-            android:name=".MenuActivity"
-            android:label="@string/title_activity_menu"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".MyStocks"
             android:label="@string/title_activity_my_stocks"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -45,7 +41,12 @@
         <activity
             android:name=".ModifyOrSell"
             android:label="@string/title_activity_modify_or_sell"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MenuActivity"
+            android:label="@string/title_activity_menu"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

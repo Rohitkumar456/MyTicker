@@ -15,6 +15,7 @@ public class AddStock extends AppCompatActivity {
     String symbol,rate;
 
     DatabaseAdapter databaseadapter;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +57,7 @@ public class AddStock extends AppCompatActivity {
         total_cost.setText(String.valueOf(totalprice));
 
     }
+    
     public void confirm_add(View view){
         String stockname,s1,s2,s3;
         int numstock;
